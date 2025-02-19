@@ -1,71 +1,46 @@
 # paint-on-C
 This is a project i tried to do in less than an hour. Its coding a simple paint program in C, adding, drawing, undo and redo, 6 different colors and a slider to change the pencil`s width.
-Complejidad Algorítmica, Tiempo y Espacio del Código:
 
-Complejidad Temporal:
-Por Fotograma (Frame):
+**Algorithmic Complexity, Time, and Space of the Code:**
 
-Mejor Caso (Sin Dibujar):
+### **Time Complexity:**
+1. **Per Frame:**
+   - **Best Case (No Drawing):** 
+     - `O(SHEET_WIDTH * SHEET_HEIGHT)` due to the `screen()` function, which redraws the entire canvas surface every frame.
+   - **Worst Case (Drawing):**
+     - `O(SHEET_WIDTH * SHEET_HEIGHT + L)`, where `L` is the length in pixels of the line being drawn in that frame.
+     - **`drawLine()` + `drawCircle()`:** 
+       - `O(L * r²)`, but since `r` (brush radius) is constant (max 16), it simplifies to `O(L)`.
+     - **Rendering (`screen()`):** 
+       - `O(SHEET_WIDTH * SHEET_HEIGHT)` due to the canvas blit.
 
-O(SHEET_WIDTH * SHEET_HEIGHT) debido a la función screen(), que redibuja toda la superficie del folio (canvas) en cada frame.
+2. **Stack Operations (Undo/Redo):**
+   - **`pushStack()`:** 
+     - Amortized `O(1)` (realloc grows exponentially).
+   - **`popStack()`:** 
+     - `O(1)`.
 
-Peor Caso (Dibujando):
+### **Space Complexity:**
+1. **Graphic Surfaces:**
+   - **Canvas:** 
+     - `O(SHEET_WIDTH * SHEET_HEIGHT * 4 bytes)` (32 bits per pixel).
+   - **Undo/Redo Stacks:** 
+     - `O(k * SHEET_WIDTH * SHEET_HEIGHT)`, where `k` is the number of saved states.
 
-O(SHEET_WIDTH * SHEET_HEIGHT + L), donde L es la longitud en píxeles de la línea dibujada en ese frame.
+2. **Dynamic Memory (Stacks):**
+   - **Surface Storage:** 
+     - Each state in undo/redo is a copy of the canvas, occupying the same space as the canvas.
 
-drawLine() + drawCircle():
+### **Summary:**
+- **Total Time per Frame:** 
+  - Dominated by canvas rendering (`O(SHEET_WIDTH * SHEET_HEIGHT)`) and drawing operations (`O(L)`).
+- **Total Space:** 
+  - Primarily determined by the canvas and the copies in undo/redo (`O(k * SHEET_AREA)`).
 
-O(L * r²), pero como r (radio del pincel) es constante (máx. 16), se simplifica a O(L).
-
-Rendering (screen()):
-
-O(SHEET_WIDTH * SHEET_HEIGHT) por el blit del canvas.
-
-Operaciones de Pila (Undo/Redo):
-
-pushStack():
-
-Amortizado O(1) (realloc crece exponencialmente).
-
-popStack():
-
-O(1).
-
-Complejidad Espacial:
-Superficies Gráficas:
-
-Canvas:
-
-O(SHEET_WIDTH * SHEET_HEIGHT * 4 bytes) (32 bits por píxel).
-
-Pilas Undo/Redo:
-
-O(k * SHEET_WIDTH * SHEET_HEIGHT), donde k es el número de estados guardados.
-
-Memoria Dinámica (Stacks):
-
-Almacenamiento de superficies:
-
-Cada estado en undo/redo es una copia del canvas, ocupando el mismo espacio que este.
-
-Resumen:
-Tiempo Total por Frame:
-
-Dominado por el rendering del canvas (O(SHEET_WIDTH * SHEET_HEIGHT)) y las operaciones de dibujo (O(L)).
-
-Espacio Total:
-
-Principalmente por el canvas y las copias en undo/redo (O(k * SHEET_AREA)).
-
-Valores Concretos (Basados en #define):
-SHEET_WIDTH = 1800 - 100 = 1700
-
-SHEET_HEIGHT = 980 - 250 = 730
-
-Espacio por Canvas:
-
-1700 * 730 * 4 ≈ 4.96 MB.
-
-Undo/Redo con 10 estados:
-
-10 * 4.96 MB ≈ 49.6 MB.
+### **Concrete Values (Based on #define):**
+- **SHEET_WIDTH = 1800 - 100 = 1700**
+- **SHEET_HEIGHT = 980 - 250 = 730**
+- **Space per Canvas:** 
+  - `1700 * 730 * 4 ≈ 4.96 MB`.
+- **Undo/Redo with 10 States:** 
+  - `10 * 4.96 MB ≈ 49.6 MB`.
