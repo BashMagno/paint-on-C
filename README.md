@@ -1,6 +1,8 @@
 # paint-on-C
-This is a project i tried to do in less than an hour. Its coding a simple paint program in C, adding, drawing, undo and redo, 6 different colors and a slider to change the pencil`s width.
-
+This is a project that I tried to do in less than an hour.
+It´s about coding a simple paint program in C.
+Functionalities: drawing, undo and redo, 6 different colors and a slider to change the pencil´s width.
+**This is not a final version, shortly i´ll try to continue but this time in less than 10 hours. This project is inspired by those YouTube videos that are like: "1 minute, 10 minuets, 1 hours, 10 hours to code bla bla bla...."  **
 **Algorithmic Complexity, Time, and Space of the Code:**
 
 ### **Time Complexity:**
