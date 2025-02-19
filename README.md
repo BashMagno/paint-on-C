@@ -1,6 +1,8 @@
 # paint-on-C
 This is a project that I tried to do in less than an hour.
 It´s about coding a simple paint program in C.
+Throughout the proccess of coding i´ve encountered a problem, if I decide to draw a line (a line is made by a variable amount of pixels making a circle) quickly enough, it will be spaced making something like this (....  .  . .  . ...).
+Thank´s to StackOverflow (Love this website) i found out that there´s an algorithm designed to solve this so i used it. If you wanna search it out, the name of the Algorithm is "Bresenham Algorithm".
 Functionalities: drawing, undo and redo, 6 different colors and a slider to change the pencil´s width.
 
 **This is not a final version, shortly i´ll try to continue but this time in less than 10 hours. This project is inspired by those YouTube videos that are like: "1 minute, 10 minuets, 1 hours, 10 hours to code bla bla bla...."**
